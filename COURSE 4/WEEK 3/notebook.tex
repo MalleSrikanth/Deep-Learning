@@ -1,0 +1,1575 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{3 (A) --Autonomous+driving+application+-+Car+detection+-+v3}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{autonomous-driving---car-detection}{%
+\section{Autonomous driving - Car
+detection}\label{autonomous-driving---car-detection}}
+
+Welcome to your week 3 programming assignment. You will learn about
+object detection using the very powerful YOLO model. Many of the ideas
+in this notebook are described in the two YOLO papers: Redmon et al.,
+2016 (https://arxiv.org/abs/1506.02640) and Redmon and Farhadi, 2016
+(https://arxiv.org/abs/1612.08242).
+
+\textbf{You will learn to}: - Use object detection on a car detection
+dataset - Deal with bounding boxes
+
+Run the following cell to load the packages and dependencies that are
+going to be useful for your journey!
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{argparse}
+        \PY{k+kn}{import} \PY{n+nn}{os}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{from} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{import} \PY{n}{imshow}
+        \PY{k+kn}{import} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{io}
+        \PY{k+kn}{import} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{misc}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{PIL}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k+kn}{import} \PY{n+nn}{tensorflow} \PY{k}{as} \PY{n+nn}{tf}
+        \PY{k+kn}{from} \PY{n+nn}{keras} \PY{k}{import} \PY{n}{backend} \PY{k}{as} \PY{n}{K}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers} \PY{k}{import} \PY{n}{Input}\PY{p}{,} \PY{n}{Lambda}\PY{p}{,} \PY{n}{Conv2D}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{models} \PY{k}{import} \PY{n}{load\PYZus{}model}\PY{p}{,} \PY{n}{Model}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Using TensorFlow backend.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k+kn}{from} \PY{n+nn}{yolo\PYZus{}utils} \PY{k}{import} \PY{n}{read\PYZus{}classes}\PY{p}{,} \PY{n}{read\PYZus{}anchors}\PY{p}{,} \PY{n}{generate\PYZus{}colors}\PY{p}{,} \PY{n}{preprocess\PYZus{}image}\PY{p}{,} \PY{n}{draw\PYZus{}boxes}\PY{p}{,} \PY{n}{scale\PYZus{}boxes}
+        \PY{k+kn}{from} \PY{n+nn}{yad2k}\PY{n+nn}{.}\PY{n+nn}{models}\PY{n+nn}{.}\PY{n+nn}{keras\PYZus{}yolo} \PY{k}{import} \PY{n}{yolo\PYZus{}head}\PY{p}{,} \PY{n}{yolo\PYZus{}boxes\PYZus{}to\PYZus{}corners}\PY{p}{,} \PY{n}{preprocess\PYZus{}true\PYZus{}boxes}\PY{p}{,} \PY{n}{yolo\PYZus{}loss}\PY{p}{,} \PY{n}{yolo\PYZus{}body}
+        
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+
+    \textbf{Important Note}: As you can see, we import Keras's backend as K.
+This means that to use a Keras function in this notebook, you will need
+to write: \texttt{K.function(...)}.
+
+    \hypertarget{problem-statement}{%
+\subsection{1 - Problem Statement}\label{problem-statement}}
+
+You are working on a self-driving car. As a critical component of this
+project, you'd like to first build a car detection system. To collect
+data, you've mounted a camera to the hood (meaning the front) of the
+car, which takes pictures of the road ahead every few seconds while you
+drive around.
+
+Pictures taken from a car-mounted camera while driving around Silicon
+Valley. We would like to especially thank
+\href{https://www.drive.ai/}{drive.ai} for providing this dataset!
+Drive.ai is a company building the brains of self-driving vehicles.
+
+You've gathered all these images into a folder and have labelled them by
+drawing bounding boxes around every car you found. Here's an example of
+what your bounding boxes look like.
+
+ \textbf{Figure 1} : \textbf{Definition of a box}
+
+If you have 80 classes that you want YOLO to recognize, you can
+represent the class label \(c\) either as an integer from 1 to 80, or as
+an 80-dimensional vector (with 80 numbers) one component of which is 1
+and the rest of which are 0. The video lectures had used the latter
+representation; in this notebook, we will use both representations,
+depending on which is more convenient for a particular step.
+
+In this exercise, you will learn how YOLO works, then apply it to car
+detection. Because the YOLO model is very computationally expensive to
+train, we will load pre-trained weights for you to use.
+
+    \hypertarget{yolo}{%
+\subsection{2 - YOLO}\label{yolo}}
+
+    YOLO (``you only look once'') is a popular algoritm because it achieves
+high accuracy while also being able to run in real-time. This algorithm
+``only looks once'' at the image in the sense that it requires only one
+forward propagation pass through the network to make predictions. After
+non-max suppression, it then outputs recognized objects together with
+the bounding boxes.
+
+\hypertarget{model-details}{%
+\subsubsection{2.1 - Model details}\label{model-details}}
+
+First things to know: - The \textbf{input} is a batch of images of shape
+(m, 608, 608, 3) - The \textbf{output} is a list of bounding boxes along
+with the recognized classes. Each bounding box is represented by 6
+numbers \((p_c, b_x, b_y, b_h, b_w, c)\) as explained above. If you
+expand \(c\) into an 80-dimensional vector, each bounding box is then
+represented by 85 numbers.
+
+We will use 5 anchor boxes. So you can think of the YOLO architecture as
+the following: IMAGE (m, 608, 608, 3) -\textgreater{} DEEP CNN
+-\textgreater{} ENCODING (m, 19, 19, 5, 85).
+
+Lets look in greater detail at what this encoding represents.
+
+ \textbf{Figure 2} : \textbf{Encoding architecture for YOLO}
+
+If the center/midpoint of an object falls into a grid cell, that grid
+cell is responsible for detecting that object.
+
+    Since we are using 5 anchor boxes, each of the 19 x19 cells thus encodes
+information about 5 boxes. Anchor boxes are defined only by their width
+and height.
+
+For simplicity, we will flatten the last two last dimensions of the
+shape (19, 19, 5, 85) encoding. So the output of the Deep CNN is (19,
+19, 425).
+
+ \textbf{Figure 3} : \textbf{Flattening the last two last dimensions}
+
+    Now, for each box (of each cell) we will compute the following
+elementwise product and extract a probability that the box contains a
+certain class.
+
+ \textbf{Figure 4} : \textbf{Find the class detected by each box}
+
+Here's one way to visualize what YOLO is predicting on an image: - For
+each of the 19x19 grid cells, find the maximum of the probability scores
+(taking a max across both the 5 anchor boxes and across different
+classes). - Color that grid cell according to what object that grid cell
+considers the most likely.
+
+Doing this results in this picture:
+
+ \textbf{Figure 5} : Each of the 19x19 grid cells colored according to
+which class has the largest predicted probability in that cell.
+
+Note that this visualization isn't a core part of the YOLO algorithm
+itself for making predictions; it's just a nice way of visualizing an
+intermediate result of the algorithm.
+
+    Another way to visualize YOLO's output is to plot the bounding boxes
+that it outputs. Doing that results in a visualization like this:
+
+ \textbf{Figure 6} : Each cell gives you 5 boxes. In total, the model
+predicts: 19x19x5 = 1805 boxes just by looking once at the image (one
+forward pass through the network)! Different colors denote different
+classes.
+
+In the figure above, we plotted only boxes that the model had assigned a
+high probability to, but this is still too many boxes. You'd like to
+filter the algorithm's output down to a much smaller number of detected
+objects. To do so, you'll use non-max suppression. Specifically, you'll
+carry out these steps: - Get rid of boxes with a low score (meaning, the
+box is not very confident about detecting a class) - Select only one box
+when several boxes overlap with each other and detect the same object.
+
+    \hypertarget{filtering-with-a-threshold-on-class-scores}{%
+\subsubsection{2.2 - Filtering with a threshold on class
+scores}\label{filtering-with-a-threshold-on-class-scores}}
+
+You are going to apply a first filter by thresholding. You would like to
+get rid of any box for which the class ``score'' is less than a chosen
+threshold.
+
+The model gives you a total of 19x19x5x85 numbers, with each box
+described by 85 numbers. It'll be convenient to rearrange the
+(19,19,5,85) (or (19,19,425)) dimensional tensor into the following
+variables:\\
+- \texttt{box\_confidence}: tensor of shape \((19 \times 19, 5, 1)\)
+containing \(p_c\) (confidence probability that there's some object) for
+each of the 5 boxes predicted in each of the 19x19 cells. -
+\texttt{boxes}: tensor of shape \((19 \times 19, 5, 4)\) containing
+\((b_x, b_y, b_h, b_w)\) for each of the 5 boxes per cell. -
+\texttt{box\_class\_probs}: tensor of shape \((19 \times 19, 5, 80)\)
+containing the detection probabilities \((c_1, c_2, ... c_{80})\) for
+each of the 80 classes for each of the 5 boxes per cell.
+
+\textbf{Exercise}: Implement \texttt{yolo\_filter\_boxes()}. 1. Compute
+box scores by doing the elementwise product as described in Figure 4.
+The following code may help you choose the right operator:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a }\OperatorTok{=}\NormalTok{ np.random.randn(}\DecValTok{19}\OperatorTok{*}\DecValTok{19}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{1}\NormalTok{)}
+\NormalTok{b }\OperatorTok{=}\NormalTok{ np.random.randn(}\DecValTok{19}\OperatorTok{*}\DecValTok{19}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{80}\NormalTok{)}
+\NormalTok{c }\OperatorTok{=}\NormalTok{ a }\OperatorTok{*}\NormalTok{ b }\CommentTok{# shape of c will be (19*19, 5, 80)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  For each box, find:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    the index of the class with the maximum box score
+    (\href{https://keras.io/backend/\#argmax}{Hint}) (Be careful with
+    what axis you choose; consider using axis=-1)
+  \item
+    the corresponding box score
+    (\href{https://keras.io/backend/\#max}{Hint}) (Be careful with what
+    axis you choose; consider using axis=-1)
+  \end{itemize}
+\item
+  Create a mask by using a threshold. As a reminder:
+  \texttt{({[}0.9,\ 0.3,\ 0.4,\ 0.5,\ 0.1{]}\ \textless{}\ 0.4)}
+  returns: \texttt{{[}False,\ True,\ False,\ False,\ True{]}}. The mask
+  should be True for the boxes you want to keep.
+\item
+  Use TensorFlow to apply the mask to box\_class\_scores, boxes and
+  box\_classes to filter out the boxes we don't want. You should be left
+  with just the subset of boxes you want to keep.
+  (\href{https://www.tensorflow.org/api_docs/python/tf/boolean_mask}{Hint})
+\end{enumerate}
+
+Reminder: to call a Keras function, you should use
+\texttt{K.function(...)}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{} GRADED FUNCTION: yolo\PYZus{}filter\PYZus{}boxes}
+         
+         \PY{k}{def} \PY{n+nf}{yolo\PYZus{}filter\PYZus{}boxes}\PY{p}{(}\PY{n}{box\PYZus{}confidence}\PY{p}{,} \PY{n}{boxes}\PY{p}{,} \PY{n}{box\PYZus{}class\PYZus{}probs}\PY{p}{,} \PY{n}{threshold} \PY{o}{=} \PY{o}{.}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Filters YOLO boxes by thresholding on object and class confidence.}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Arguments:}
+         \PY{l+s+sd}{    box\PYZus{}confidence \PYZhy{}\PYZhy{} tensor of shape (19, 19, 5, 1)}
+         \PY{l+s+sd}{    boxes \PYZhy{}\PYZhy{} tensor of shape (19, 19, 5, 4)}
+         \PY{l+s+sd}{    box\PYZus{}class\PYZus{}probs \PYZhy{}\PYZhy{} tensor of shape (19, 19, 5, 80)}
+         \PY{l+s+sd}{    threshold \PYZhy{}\PYZhy{} real value, if [ highest class probability score \PYZlt{} threshold], then get rid of the corresponding box}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Returns:}
+         \PY{l+s+sd}{    scores \PYZhy{}\PYZhy{} tensor of shape (None,), containing the class probability score for selected boxes}
+         \PY{l+s+sd}{    boxes \PYZhy{}\PYZhy{} tensor of shape (None, 4), containing (b\PYZus{}x, b\PYZus{}y, b\PYZus{}h, b\PYZus{}w) coordinates of selected boxes}
+         \PY{l+s+sd}{    classes \PYZhy{}\PYZhy{} tensor of shape (None,), containing the index of the class detected by the selected boxes}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Note: \PYZdq{}None\PYZdq{} is here because you don\PYZsq{}t know the exact number of selected boxes, as it depends on the threshold. }
+         \PY{l+s+sd}{    For example, the actual output size of scores would be (10,) if there are 10 boxes.}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             
+             \PY{c+c1}{\PYZsh{} Step 1: Compute box scores}
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} START CODE HERE \PYZsh{}\PYZsh{}\PYZsh{} (≈ 1 line)}
+             \PY{n}{box\PYZus{}scores} \PY{o}{=} \PY{n}{box\PYZus{}confidence} \PY{o}{*} \PY{n}{box\PYZus{}class\PYZus{}probs}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{box\PYZus{}scores}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} END CODE HERE \PYZsh{}\PYZsh{}\PYZsh{}}
+             
+             \PY{c+c1}{\PYZsh{} Step 2: Find the box\PYZus{}classes thanks to the max box\PYZus{}scores, keep track of the corresponding score}
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} START CODE HERE \PYZsh{}\PYZsh{}\PYZsh{} (≈ 2 lines)}
+             \PY{n}{box\PYZus{}classes} \PY{o}{=} \PY{n}{K}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{box\PYZus{}scores} \PY{p}{,}\PY{n}{axis} \PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{box\PYZus{}class\PYZus{}scores} \PY{o}{=} \PY{n}{K}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{box\PYZus{}scores} \PY{p}{,}\PY{n}{axis} \PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{box\PYZus{}classes} \PY{p}{,}\PY{n}{box\PYZus{}class\PYZus{}scores}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}print(box\PYZus{}classes.eval() ,box\PYZus{}class\PYZus{}scores.eval())}
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} END CODE HERE \PYZsh{}\PYZsh{}\PYZsh{}}
+             
+             \PY{c+c1}{\PYZsh{} Step 3: Create a filtering mask based on \PYZdq{}box\PYZus{}class\PYZus{}scores\PYZdq{} by using \PYZdq{}threshold\PYZdq{}. The mask should have the}
+             \PY{c+c1}{\PYZsh{} same dimension as box\PYZus{}class\PYZus{}scores, and be True for the boxes you want to keep (with probability \PYZgt{}= threshold)}
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} START CODE HERE \PYZsh{}\PYZsh{}\PYZsh{} (≈ 1 line)}
+             \PY{n}{filtering\PYZus{}mask} \PY{o}{=} \PY{p}{(}\PY{n}{box\PYZus{}class\PYZus{}scores} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{threshold}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{filtering\PYZus{}mask}\PY{p}{)}     
+             \PY{c+c1}{\PYZsh{}print(filtering\PYZus{}mask.eval())}
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} END CODE HERE \PYZsh{}\PYZsh{}\PYZsh{}}
+             
+             \PY{c+c1}{\PYZsh{} Step 4: Apply the mask to scores, boxes and classes}
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} START CODE HERE \PYZsh{}\PYZsh{}\PYZsh{} (≈ 3 lines)}
+             \PY{n}{scores} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{boolean\PYZus{}mask}\PY{p}{(}\PY{n}{box\PYZus{}class\PYZus{}scores}\PY{p}{,}\PY{n}{filtering\PYZus{}mask}\PY{p}{)}
+             \PY{n}{boxes} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{boolean\PYZus{}mask}\PY{p}{(}\PY{n}{boxes}\PY{p}{,}\PY{n}{filtering\PYZus{}mask}\PY{p}{)}
+             \PY{n}{classes} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{boolean\PYZus{}mask}\PY{p}{(}\PY{n}{box\PYZus{}classes}\PY{p}{,}\PY{n}{filtering\PYZus{}mask}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} END CODE HERE \PYZsh{}\PYZsh{}\PYZsh{}}
+             
+             \PY{k}{return} \PY{n}{scores}\PY{p}{,} \PY{n}{boxes}\PY{p}{,} \PY{n}{classes}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{box\PYZus{}confidence} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{random\PYZus{}normal}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{19}\PY{p}{,} \PY{l+m+mi}{19}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{mean}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{stddev}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{seed} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{boxes} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{random\PYZus{}normal}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{19}\PY{p}{,} \PY{l+m+mi}{19}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{]}\PY{p}{,} \PY{n}{mean}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{stddev}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{seed} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{box\PYZus{}class\PYZus{}probs} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{random\PYZus{}normal}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{19}\PY{p}{,} \PY{l+m+mi}{19}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{80}\PY{p}{]}\PY{p}{,} \PY{n}{mean}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{stddev}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{seed} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{box\PYZus{}confidence} \PY{p}{,}\PY{n}{boxes} \PY{p}{,} \PY{n}{box\PYZus{}class\PYZus{}probs}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Tensor("random\_normal:0", shape=(19, 19, 5, 1), dtype=float32) Tensor("random\_normal\_1:0", shape=(19, 19, 5, 4), dtype=float32) Tensor("random\_normal\_2:0", shape=(19, 19, 5, 80), dtype=float32)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{k}{with} \PY{n}{tf}\PY{o}{.}\PY{n}{Session}\PY{p}{(}\PY{p}{)} \PY{k}{as} \PY{n}{sess}\PY{p}{:}
+             \PY{n}{box\PYZus{}confidence} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{random\PYZus{}normal}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{19}\PY{p}{,} \PY{l+m+mi}{19}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{mean}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{stddev}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{seed} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{boxes} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{random\PYZus{}normal}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{19}\PY{p}{,} \PY{l+m+mi}{19}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{]}\PY{p}{,} \PY{n}{mean}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{stddev}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{seed} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{box\PYZus{}class\PYZus{}probs} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{random\PYZus{}normal}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{19}\PY{p}{,} \PY{l+m+mi}{19}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{80}\PY{p}{]}\PY{p}{,} \PY{n}{mean}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{stddev}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{seed} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{scores}\PY{p}{,} \PY{n}{boxes}\PY{p}{,} \PY{n}{classes} \PY{o}{=} \PY{n}{yolo\PYZus{}filter\PYZus{}boxes}\PY{p}{(}\PY{n}{box\PYZus{}confidence}\PY{p}{,} \PY{n}{boxes}\PY{p}{,} \PY{n}{box\PYZus{}class\PYZus{}probs}\PY{p}{,} \PY{n}{threshold} \PY{o}{=} \PY{l+m+mf}{0.5}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{scores[2] = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{scores}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{boxes[2] = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{boxes}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{classes[2] = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{classes}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{scores.shape = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{scores}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{boxes.shape = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{boxes}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{classes.shape = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{classes}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Tensor("mul\_3:0", shape=(19, 19, 5, 80), dtype=float32)
+Tensor("ArgMax\_3:0", shape=(19, 19, 5), dtype=int64) Tensor("Max\_3:0", shape=(19, 19, 5), dtype=float32)
+Tensor("GreaterEqual\_2:0", shape=(19, 19, 5), dtype=bool)
+scores[2] = 10.750582
+boxes[2] = [ 8.426533   3.2713668 -0.5313436 -4.9413733]
+classes[2] = 7
+scores.shape = (?,)
+boxes.shape = (?, 4)
+classes.shape = (?,)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} here above scores is respected classes of value and its box shape values are boxes.shape}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{scores :}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ boxes :}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ classes :}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}  \PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{scores} \PY{p}{,} \PY{n}{boxes} \PY{p}{,}\PY{n}{classes}\PY{p}{)} \PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+scores :Tensor("boolean\_mask\_3/GatherV2:0", shape=(?,), dtype=float32) 
+ boxes :Tensor("boolean\_mask\_4/GatherV2:0", shape=(?, 4), dtype=float32) 
+ classes :Tensor("boolean\_mask\_5/GatherV2:0", shape=(?,), dtype=int64)
+
+    \end{Verbatim}
+
+    \textbf{Expected Output}:
+
+\textbf{scores{[}2{]}}
+
+10.7506
+
+\textbf{boxes{[}2{]}}
+
+{[} 8.42653275 3.27136683 -0.5313437 -4.94137383{]}
+
+\textbf{classes{[}2{]}}
+
+7
+
+\textbf{scores.shape}
+
+(?,)
+
+\textbf{boxes.shape}
+
+(?, 4)
+
+\textbf{classes.shape}
+
+(?,)
+
+    \hypertarget{non-max-suppression}{%
+\subsubsection{2.3 - Non-max suppression}\label{non-max-suppression}}
+
+Even after filtering by thresholding over the classes scores, you still
+end up a lot of overlapping boxes. A second filter for selecting the
+right boxes is called non-maximum suppression (NMS).
+
+     \textbf{Figure 7} : In this example, the model has predicted 3 cars,
+but it's actually 3 predictions of the same car. Running non-max
+suppression (NMS) will select only the most accurate (highest
+probabiliy) one of the 3 boxes. 
+
+    Non-max suppression uses the very important function called
+\textbf{``Intersection over Union''}, or IoU.
+
+ \textbf{Figure 8} : Definition of ``Intersection over Union''.
+
+\textbf{Exercise}: Implement iou(). Some hints: - In this exercise only,
+we define a box using its two corners (upper left and lower right):
+\texttt{(x1,\ y1,\ x2,\ y2)} rather than the midpoint and height/width.
+- To calculate the area of a rectangle you need to multiply its height
+\texttt{(y2\ -\ y1)} by its width \texttt{(x2\ -\ x1)}. - You'll also
+need to find the coordinates \texttt{(xi1,\ yi1,\ xi2,\ yi2)} of the
+intersection of two boxes. Remember that: - xi1 = maximum of the x1
+coordinates of the two boxes - yi1 = maximum of the y1 coordinates of
+the two boxes - xi2 = minimum of the x2 coordinates of the two boxes -
+yi2 = minimum of the y2 coordinates of the two boxes - In order to
+compute the intersection area, you need to make sure the height and
+width of the intersection are positive, otherwise the intersection area
+should be zero. Use \texttt{max(height,\ 0)} and
+\texttt{max(width,\ 0)}.
+
+In this code, we use the convention that (0,0) is the top-left corner of
+an image, (1,0) is the upper-right corner, and (1,1) the lower-right
+corner.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{c+c1}{\PYZsh{} GRADED FUNCTION: iou}
+         
+         \PY{k}{def} \PY{n+nf}{iou}\PY{p}{(}\PY{n}{box1}\PY{p}{,} \PY{n}{box2}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Implement the intersection over union (IoU) between box1 and box2}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Arguments:}
+         \PY{l+s+sd}{    box1 \PYZhy{}\PYZhy{} first box, list object with coordinates (x1, y1, x2, y2)}
+         \PY{l+s+sd}{    box2 \PYZhy{}\PYZhy{} second box, list object with coordinates (x1, y1, x2, y2)}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+         
+             \PY{c+c1}{\PYZsh{} Calculate the (y1, x1, y2, x2) coordinates of the intersection of box1 and box2. Calculate its Area.}
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} START CODE HERE \PYZsh{}\PYZsh{}\PYZsh{} (≈ 5 lines)}
+             
+             \PY{n}{xi1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{maximum}\PY{p}{(}\PY{n}{box1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{box2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}  \PY{c+c1}{\PYZsh{} for lower point index of x  }
+             \PY{n}{yi1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{maximum}\PY{p}{(}\PY{n}{box1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{box2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}  \PY{c+c1}{\PYZsh{} for lower index of y}
+             \PY{n}{xi2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{minimum}\PY{p}{(}\PY{n}{box1}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{n}{box2}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}  \PY{c+c1}{\PYZsh{} for higher index of x }
+             \PY{n}{yi2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{minimum}\PY{p}{(}\PY{n}{box1}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,} \PY{n}{box2}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}  \PY{c+c1}{\PYZsh{} for higher index of y}
+             \PY{n}{inter\PYZus{}area} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{p}{(}\PY{n}{xi1} \PY{o}{\PYZhy{}} \PY{n}{xi2}\PY{p}{)} \PY{o}{*} \PY{p}{(}\PY{n}{yi1} \PY{o}{\PYZhy{}} \PY{n}{yi2}\PY{p}{)}\PY{p}{)}  \PY{c+c1}{\PYZsh{} with respect to above index points get area of overlapping boxes }
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{co\PYZhy{}ord of overlapping area  }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ ,}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ ,}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ ,}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{  inter\PYZus{}area :}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}} \PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{xi1} \PY{p}{,}\PY{n}{yi1} \PY{p}{,}\PY{n}{xi2} \PY{p}{,}\PY{n}{yi2} \PY{p}{,} \PY{n}{inter\PYZus{}area}\PY{p}{)} \PY{p}{)}
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} END CODE HERE \PYZsh{}\PYZsh{}\PYZsh{}    }
+         
+             \PY{c+c1}{\PYZsh{} Calculate the Union area by using Formula: Union(A,B) = A + B \PYZhy{} Inter(A,B)}
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} START CODE HERE \PYZsh{}\PYZsh{}\PYZsh{} (≈ 3 lines)}
+             \PY{n}{box1\PYZus{}area} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{p}{(}\PY{n}{box1}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{box1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{o}{*} \PY{p}{(}\PY{n}{box1}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{box1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} coordinates geometry (x2\PYZhy{}x1) *(y2\PYZhy{}y1) for box areas }
+             \PY{n}{box2\PYZus{}area} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{p}{(}\PY{n}{box2}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{box2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{o}{*} \PY{p}{(}\PY{n}{box2}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{box2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+             \PY{n}{union\PYZus{}area} \PY{o}{=} \PY{n}{box1\PYZus{}area} \PY{o}{+} \PY{n}{box2\PYZus{}area} \PY{o}{\PYZhy{}} \PY{n}{inter\PYZus{}area}  \PY{c+c1}{\PYZsh{} total box\PYZsq{}s areas \PYZhy{} overlapping area for union  }
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{boxes\PYZus{}area without overlapping area}\PY{l+s+s1}{\PYZsq{}} \PY{p}{,} \PY{n}{box1\PYZus{}area} \PY{p}{,}\PY{n}{box2\PYZus{}area} \PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{union\PYZus{}area}\PY{l+s+s1}{\PYZsq{}} \PY{p}{,}\PY{n}{union\PYZus{}area}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} END CODE HERE \PYZsh{}\PYZsh{}\PYZsh{}}
+             
+             \PY{c+c1}{\PYZsh{} compute the IoU}
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} START CODE HERE \PYZsh{}\PYZsh{}\PYZsh{} (≈ 1 line)}
+             \PY{n}{iou} \PY{o}{=} \PY{n}{inter\PYZus{}area} \PY{o}{/} \PY{n}{union\PYZus{}area} 
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} END CODE HERE \PYZsh{}\PYZsh{}\PYZsh{}}
+         
+             \PY{k}{return} \PY{n}{iou}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{box1} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}
+         \PY{n}{box2} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)} 
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{iou = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{iou}\PY{p}{(}\PY{n}{box1}\PY{p}{,} \PY{n}{box2}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+co-ord of overlapping area  2 ,2 ,3 ,3 
+  inter\_area :1
+boxes\_area without overlapping area 4 4 union\_area 7
+iou = 0.14285714285714285
+
+    \end{Verbatim}
+
+    \textbf{Expected Output}:
+
+\textbf{iou = }
+
+0.14285714285714285
+
+    You are now ready to implement non-max suppression. The key steps are:
+1. Select the box that has the highest score. 2. Compute its overlap
+with all other boxes, and remove boxes that overlap it more than
+\texttt{iou\_threshold}. 3. Go back to step 1 and iterate until there's
+no more boxes with a lower score than the current selected box.
+
+This will remove all boxes that have a large overlap with the selected
+boxes. Only the ``best'' boxes remain.
+
+\textbf{Exercise}: Implement yolo\_non\_max\_suppression() using
+TensorFlow. TensorFlow has two built-in functions that are used to
+implement non-max suppression (so you don't actually need to use your
+\texttt{iou()} implementation): -
+\href{https://www.tensorflow.org/api_docs/python/tf/image/non_max_suppression}{tf.image.non\_max\_suppression()}
+-
+\href{https://www.tensorflow.org/api_docs/python/tf/gather}{K.gather()}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{c+c1}{\PYZsh{} GRADED FUNCTION: yolo\PYZus{}non\PYZus{}max\PYZus{}suppression}
+         
+         \PY{k}{def} \PY{n+nf}{yolo\PYZus{}non\PYZus{}max\PYZus{}suppression}\PY{p}{(}\PY{n}{scores}\PY{p}{,} \PY{n}{boxes}\PY{p}{,} \PY{n}{classes}\PY{p}{,} \PY{n}{max\PYZus{}boxes} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{,} \PY{n}{iou\PYZus{}threshold} \PY{o}{=} \PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    Applies Non\PYZhy{}max suppression (NMS) to set of boxes}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Arguments:}
+         \PY{l+s+sd}{    scores \PYZhy{}\PYZhy{} tensor of shape (None,), output of yolo\PYZus{}filter\PYZus{}boxes()}
+         \PY{l+s+sd}{    boxes \PYZhy{}\PYZhy{} tensor of shape (None, 4), output of yolo\PYZus{}filter\PYZus{}boxes() that have been scaled to the image size (see later)}
+         \PY{l+s+sd}{    classes \PYZhy{}\PYZhy{} tensor of shape (None,), output of yolo\PYZus{}filter\PYZus{}boxes()}
+         \PY{l+s+sd}{    max\PYZus{}boxes \PYZhy{}\PYZhy{} integer, maximum number of predicted boxes you\PYZsq{}d like}
+         \PY{l+s+sd}{    iou\PYZus{}threshold \PYZhy{}\PYZhy{} real value, \PYZdq{}intersection over union\PYZdq{} threshold used for NMS filtering}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Returns:}
+         \PY{l+s+sd}{    scores \PYZhy{}\PYZhy{} tensor of shape (, None), predicted score for each box}
+         \PY{l+s+sd}{    boxes \PYZhy{}\PYZhy{} tensor of shape (4, None), predicted box coordinates}
+         \PY{l+s+sd}{    classes \PYZhy{}\PYZhy{} tensor of shape (, None), predicted class for each box}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Note: The \PYZdq{}None\PYZdq{} dimension of the output tensors has obviously to be less than max\PYZus{}boxes. Note also that this}
+         \PY{l+s+sd}{    function will transpose the shapes of scores, boxes, classes. This is made for convenience.}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             
+             \PY{n}{max\PYZus{}boxes\PYZus{}tensor} \PY{o}{=} \PY{n}{K}\PY{o}{.}\PY{n}{variable}\PY{p}{(}\PY{n}{max\PYZus{}boxes}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{int32}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}     \PY{c+c1}{\PYZsh{} tensor to be used in tf.image.non\PYZus{}max\PYZus{}suppression()}
+             \PY{n}{K}\PY{o}{.}\PY{n}{get\PYZus{}session}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{variables\PYZus{}initializer}\PY{p}{(}\PY{p}{[}\PY{n}{max\PYZus{}boxes\PYZus{}tensor}\PY{p}{]}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} initialize variable max\PYZus{}boxes\PYZus{}tensor}
+             
+             \PY{c+c1}{\PYZsh{} Use tf.image.non\PYZus{}max\PYZus{}suppression() to get the list of indices corresponding to boxes you keep}
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} START CODE HERE \PYZsh{}\PYZsh{}\PYZsh{} (≈ 1 line)}
+             \PY{n}{nms\PYZus{}indices} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{image}\PY{o}{.}\PY{n}{non\PYZus{}max\PYZus{}suppression}\PY{p}{(}\PY{n}{boxes}\PY{p}{,} \PY{n}{scores} \PY{p}{,}\PY{n}{max\PYZus{}boxes\PYZus{}tensor} \PY{p}{,} \PY{n}{iou\PYZus{}threshold} \PY{p}{,}\PY{n}{name} \PY{o}{=}\PY{k+kc}{None}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{nms\PYZus{}indices}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} END CODE HERE \PYZsh{}\PYZsh{}\PYZsh{}}
+             
+             \PY{c+c1}{\PYZsh{} Use K.gather() to select only nms\PYZus{}indices from scores, boxes and classes}
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} START CODE HERE \PYZsh{}\PYZsh{}\PYZsh{} (≈ 3 lines)}
+             \PY{n}{scores} \PY{o}{=} \PY{n}{K}\PY{o}{.}\PY{n}{gather}\PY{p}{(}\PY{n}{scores} \PY{p}{,} \PY{n}{nms\PYZus{}indices}\PY{p}{)}
+             \PY{n}{boxes} \PY{o}{=} \PY{n}{K}\PY{o}{.}\PY{n}{gather}\PY{p}{(}\PY{n}{boxes} \PY{p}{,} \PY{n}{nms\PYZus{}indices}\PY{p}{)}
+             \PY{n}{classes} \PY{o}{=} \PY{n}{K}\PY{o}{.}\PY{n}{gather}\PY{p}{(}\PY{n}{classes} \PY{p}{,} \PY{n}{nms\PYZus{}indices}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} END CODE HERE \PYZsh{}\PYZsh{}\PYZsh{}}
+             
+             \PY{k}{return} \PY{n}{scores}\PY{p}{,} \PY{n}{boxes}\PY{p}{,} \PY{n}{classes}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{c+c1}{\PYZsh{} here test\PYZus{}b is given but you can use sess also but clarity we use it}
+         \PY{k}{with} \PY{n}{tf}\PY{o}{.}\PY{n}{Session}\PY{p}{(}\PY{p}{)} \PY{k}{as} \PY{n}{test\PYZus{}b}\PY{p}{:}
+             \PY{n}{scores} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{random\PYZus{}normal}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{54}\PY{p}{,}\PY{p}{]}\PY{p}{,} \PY{n}{mean}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{stddev}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{seed} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{boxes} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{random\PYZus{}normal}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{54}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{]}\PY{p}{,} \PY{n}{mean}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{stddev}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{seed} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{classes} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{random\PYZus{}normal}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{54}\PY{p}{,}\PY{p}{]}\PY{p}{,} \PY{n}{mean}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{stddev}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{seed} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{scores}\PY{p}{,} \PY{n}{boxes}\PY{p}{,} \PY{n}{classes} \PY{o}{=} \PY{n}{yolo\PYZus{}non\PYZus{}max\PYZus{}suppression}\PY{p}{(}\PY{n}{scores}\PY{p}{,} \PY{n}{boxes}\PY{p}{,} \PY{n}{classes}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{scores[2] = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{scores}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{boxes[2] = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{boxes}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{classes[2] = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{classes}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{scores.shape = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{scores}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{boxes.shape = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{boxes}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{classes.shape = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{classes}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Tensor("non\_max\_suppression/NonMaxSuppressionV3:0", shape=(?,), dtype=int32)
+scores[2] = 6.938395
+boxes[2] = [-5.299932    3.1379814   4.450367    0.95942086]
+classes[2] = -2.2452729
+scores.shape = (10,)
+boxes.shape = (10, 4)
+classes.shape = (10,)
+
+    \end{Verbatim}
+
+    \textbf{Expected Output}:
+
+\textbf{scores{[}2{]}}
+
+6.9384
+
+\textbf{boxes{[}2{]}}
+
+{[}-5.299932 3.13798141 4.45036697 0.95942086{]}
+
+\textbf{classes{[}2{]}}
+
+-2.24527
+
+\textbf{scores.shape}
+
+(10,)
+
+\textbf{boxes.shape}
+
+(10, 4)
+
+\textbf{classes.shape}
+
+(10,)
+
+    \hypertarget{wrapping-up-the-filtering}{%
+\subsubsection{2.4 Wrapping up the
+filtering}\label{wrapping-up-the-filtering}}
+
+It's time to implement a function taking the output of the deep CNN (the
+19x19x5x85 dimensional encoding) and filtering through all the boxes
+using the functions you've just implemented.
+
+\textbf{Exercise}: Implement \texttt{yolo\_eval()} which takes the
+output of the YOLO encoding and filters the boxes using score threshold
+and NMS. There's just one last implementational detail you have to know.
+There're a few ways of representing boxes, such as via their corners or
+via their midpoint and height/width. YOLO converts between a few such
+formats at different times, using the following functions (which we have
+provided):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{boxes }\OperatorTok{=}\NormalTok{ yolo_boxes_to_corners(box_xy, box_wh) }
+\end{Highlighting}
+\end{Shaded}
+
+which converts the yolo box coordinates (x,y,w,h) to box corners'
+coordinates (x1, y1, x2, y2) to fit the input of
+\texttt{yolo\_filter\_boxes}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{boxes }\OperatorTok{=}\NormalTok{ scale_boxes(boxes, image_shape)}
+\end{Highlighting}
+\end{Shaded}
+
+YOLO's network was trained to run on 608x608 images. If you are testing
+this data on a different size image--for example, the car detection
+dataset had 720x1280 images--this step rescales the boxes so that they
+can be plotted on top of the original 720x1280 image.
+
+Don't worry about these two functions; we'll show you where they need to
+be called.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{c+c1}{\PYZsh{} GRADED FUNCTION: yolo\PYZus{}eval}
+         
+         \PY{k}{def} \PY{n+nf}{yolo\PYZus{}eval}\PY{p}{(}\PY{n}{yolo\PYZus{}outputs}\PY{p}{,} \PY{n}{image\PYZus{}shape} \PY{o}{=} \PY{p}{(}\PY{l+m+mf}{720.}\PY{p}{,} \PY{l+m+mf}{1280.}\PY{p}{)}\PY{p}{,} \PY{n}{max\PYZus{}boxes}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{score\PYZus{}threshold}\PY{o}{=}\PY{o}{.}\PY{l+m+mi}{6}\PY{p}{,} \PY{n}{iou\PYZus{}threshold}\PY{o}{=}\PY{o}{.}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    Converts the output of YOLO encoding (a lot of boxes) to your predicted boxes }
+         \PY{l+s+sd}{    along with their scores, box coordinates and classes.}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Arguments:}
+         \PY{l+s+sd}{    yolo\PYZus{}outputs \PYZhy{}\PYZhy{} output of the encoding model (for image\PYZus{}shape of (608, 608, 3)), contains 4 tensors:}
+         \PY{l+s+sd}{                    box\PYZus{}confidence: tensor of shape (None, 19, 19, 5, 1)}
+         \PY{l+s+sd}{                    box\PYZus{}xy: tensor of shape (None, 19, 19, 5, 2)}
+         \PY{l+s+sd}{                    box\PYZus{}wh: tensor of shape (None, 19, 19, 5, 2)}
+         \PY{l+s+sd}{                    box\PYZus{}class\PYZus{}probs: tensor of shape (None, 19, 19, 5, 80)}
+         \PY{l+s+sd}{    image\PYZus{}shape \PYZhy{}\PYZhy{} tensor of shape (2,) containing the input shape, in this notebook we use (608., 608.)}
+         \PY{l+s+sd}{    (has to be float32 dtype)}
+         \PY{l+s+sd}{    max\PYZus{}boxes \PYZhy{}\PYZhy{} integer, maximum number of predicted boxes you\PYZsq{}d like}
+         \PY{l+s+sd}{    score\PYZus{}threshold \PYZhy{}\PYZhy{} real value, if [ highest class probability score \PYZlt{} threshold], then get rid of the corresponding box}
+         \PY{l+s+sd}{    iou\PYZus{}threshold \PYZhy{}\PYZhy{} real value, \PYZdq{}intersection over union\PYZdq{} threshold used for NMS filtering}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Returns:}
+         \PY{l+s+sd}{    scores \PYZhy{}\PYZhy{} tensor of shape (None, ), predicted score for each box}
+         \PY{l+s+sd}{    boxes \PYZhy{}\PYZhy{} tensor of shape (None, 4), predicted box coordinates}
+         \PY{l+s+sd}{    classes \PYZhy{}\PYZhy{} tensor of shape (None,), predicted class for each box}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} START CODE HERE \PYZsh{}\PYZsh{}\PYZsh{} }
+             
+             \PY{c+c1}{\PYZsh{} Retrieve outputs of the YOLO model (≈1 line)}
+             \PY{n}{box\PYZus{}confidence}\PY{p}{,} \PY{n}{box\PYZus{}xy}\PY{p}{,} \PY{n}{box\PYZus{}wh}\PY{p}{,} \PY{n}{box\PYZus{}class\PYZus{}probs} \PY{o}{=} \PY{n}{yolo\PYZus{}outputs}
+         
+             \PY{c+c1}{\PYZsh{} Convert boxes to be ready for filtering functions }
+             \PY{n}{boxes} \PY{o}{=} \PY{n}{yolo\PYZus{}boxes\PYZus{}to\PYZus{}corners}\PY{p}{(}\PY{n}{box\PYZus{}xy}\PY{p}{,} \PY{n}{box\PYZus{}wh}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Use one of the functions you\PYZsq{}ve implemented to perform Score\PYZhy{}filtering with a threshold of score\PYZus{}threshold (≈1 line)}
+             \PY{n}{scores}\PY{p}{,} \PY{n}{boxes}\PY{p}{,} \PY{n}{classes} \PY{o}{=} \PY{n}{yolo\PYZus{}filter\PYZus{}boxes}\PY{p}{(}\PY{n}{box\PYZus{}confidence} \PY{p}{,} \PY{n}{boxes}\PY{p}{,} \PY{n}{box\PYZus{}class\PYZus{}probs} \PY{p}{,}\PY{n}{score\PYZus{}threshold}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} this yolo\PYZus{}filter\PYZus{}boxes is same as above one yolo\PYZus{}filter , both can be utilised }
+             
+             \PY{c+c1}{\PYZsh{} Scale boxes back to original image shape.}
+             \PY{n}{boxes} \PY{o}{=} \PY{n}{scale\PYZus{}boxes}\PY{p}{(}\PY{n}{boxes}\PY{p}{,} \PY{n}{image\PYZus{}shape}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Use one of the functions you\PYZsq{}ve implemented to perform Non\PYZhy{}max suppression with a threshold of iou\PYZus{}threshold (≈1 line)}
+             \PY{n}{scores}\PY{p}{,} \PY{n}{boxes}\PY{p}{,} \PY{n}{classes} \PY{o}{=} \PY{n}{yolo\PYZus{}non\PYZus{}max\PYZus{}suppression}\PY{p}{(}\PY{n}{scores}\PY{p}{,} \PY{n}{boxes}\PY{p}{,} \PY{n}{classes}\PY{p}{,} \PY{n}{max\PYZus{}boxes}\PY{p}{,} \PY{n}{iou\PYZus{}threshold}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} END CODE HERE \PYZsh{}\PYZsh{}\PYZsh{}}
+             
+             \PY{k}{return} \PY{n}{scores}\PY{p}{,} \PY{n}{boxes}\PY{p}{,} \PY{n}{classes}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{k}{with} \PY{n}{tf}\PY{o}{.}\PY{n}{Session}\PY{p}{(}\PY{p}{)} \PY{k}{as} \PY{n}{test\PYZus{}b}\PY{p}{:}
+             \PY{n}{yolo\PYZus{}outputs} \PY{o}{=} \PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{random\PYZus{}normal}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{19}\PY{p}{,} \PY{l+m+mi}{19}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{mean}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{stddev}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{seed} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}
+                             \PY{n}{tf}\PY{o}{.}\PY{n}{random\PYZus{}normal}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{19}\PY{p}{,} \PY{l+m+mi}{19}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{n}{mean}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{stddev}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{seed} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}
+                             \PY{n}{tf}\PY{o}{.}\PY{n}{random\PYZus{}normal}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{19}\PY{p}{,} \PY{l+m+mi}{19}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{n}{mean}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{stddev}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{seed} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}
+                             \PY{n}{tf}\PY{o}{.}\PY{n}{random\PYZus{}normal}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{19}\PY{p}{,} \PY{l+m+mi}{19}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{80}\PY{p}{]}\PY{p}{,} \PY{n}{mean}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{stddev}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{seed} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+             \PY{n}{scores}\PY{p}{,} \PY{n}{boxes}\PY{p}{,} \PY{n}{classes} \PY{o}{=} \PY{n}{yolo\PYZus{}eval}\PY{p}{(}\PY{n}{yolo\PYZus{}outputs}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{scores[2] = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{scores}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{boxes[2] = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{boxes}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{classes[2] = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{classes}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{scores.shape = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{scores}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{boxes.shape = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{boxes}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{classes.shape = }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{classes}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Tensor("mul\_4:0", shape=(19, 19, 5, 80), dtype=float32)
+Tensor("ArgMax\_4:0", shape=(19, 19, 5), dtype=int64) Tensor("Max\_4:0", shape=(19, 19, 5), dtype=float32)
+Tensor("GreaterEqual\_3:0", shape=(19, 19, 5), dtype=bool)
+Tensor("non\_max\_suppression\_1/NonMaxSuppressionV3:0", shape=(?,), dtype=int32)
+scores[2] = 138.79124
+boxes[2] = [1292.3297  -278.52167 3876.9893  -835.56494]
+classes[2] = 54
+scores.shape = (10,)
+boxes.shape = (10, 4)
+classes.shape = (10,)
+
+    \end{Verbatim}
+
+    \textbf{Expected Output}:
+
+\textbf{scores{[}2{]}}
+
+138.791
+
+\textbf{boxes{[}2{]}}
+
+{[} 1292.32971191 -278.52166748 3876.98925781 -835.56494141{]}
+
+\textbf{classes{[}2{]}}
+
+54
+
+\textbf{scores.shape}
+
+(10,)
+
+\textbf{boxes.shape}
+
+(10, 4)
+
+\textbf{classes.shape}
+
+(10,)
+
+     \textbf{Summary for YOLO}: - Input image (608, 608, 3) - The input
+image goes through a CNN, resulting in a (19,19,5,85) dimensional
+output. - After flattening the last two dimensions, the output is a
+volume of shape (19, 19, 425): - Each cell in a 19x19 grid over the
+input image gives 425 numbers. - 425 = 5 x 85 because each cell contains
+predictions for 5 boxes, corresponding to 5 anchor boxes, as seen in
+lecture. - 85 = 5 + 80 where 5 is because \((p_c, b_x, b_y, b_h, b_w)\)
+has 5 numbers, and and 80 is the number of classes we'd like to detect -
+You then select only few boxes based on: - Score-thresholding: throw
+away boxes that have detected a class with a score less than the
+threshold - Non-max suppression: Compute the Intersection over Union and
+avoid selecting overlapping boxes - This gives you YOLO's final output.
+
+    \hypertarget{test-yolo-pretrained-model-on-images}{%
+\subsection{3 - Test YOLO pretrained model on
+images}\label{test-yolo-pretrained-model-on-images}}
+
+    In this part, you are going to use a pretrained model and test it on the
+car detection dataset. As usual, you start by \textbf{creating a session
+to start your graph}. Run the following cell.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{sess} \PY{o}{=} \PY{n}{K}\PY{o}{.}\PY{n}{get\PYZus{}session}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{defining-classes-anchors-and-image-shape.}{%
+\subsubsection{3.1 - Defining classes, anchors and image
+shape.}\label{defining-classes-anchors-and-image-shape.}}
+
+    Recall that we are trying to detect 80 classes, and are using 5 anchor
+boxes. We have gathered the information about the 80 classes and 5 boxes
+in two files ``coco\_classes.txt'' and ``yolo\_anchors.txt''. Let's load
+these quantities into the model by running the next cell.
+
+The car detection dataset has 720x1280 images, which we've pre-processed
+into 608x608 images.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{class\PYZus{}names} \PY{o}{=} \PY{n}{read\PYZus{}classes}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{model\PYZus{}data/coco\PYZus{}classes.txt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{anchors} \PY{o}{=} \PY{n}{read\PYZus{}anchors}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{model\PYZus{}data/yolo\PYZus{}anchors.txt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{image\PYZus{}shape} \PY{o}{=} \PY{p}{(}\PY{l+m+mf}{720.}\PY{p}{,} \PY{l+m+mf}{1280.}\PY{p}{)}    
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{class\PYZus{}names :}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ anchors :}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ image\PYZus{}shape :}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}} \PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{class\PYZus{}names} \PY{p}{,}\PY{n}{anchors} \PY{p}{,}\PY{n}{image\PYZus{}shape}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+class\_names :['person', 'bicycle', 'car', 'motorbike', 'aeroplane', 'bus', 'train', 'truck', 'boat', 'traffic light', 'fire hydrant', 'stop sign', 'parking meter', 'bench', 'bird', 'cat', 'dog', 'horse', 'sheep', 'cow', 'elephant', 'bear', 'zebra', 'giraffe', 'backpack', 'umbrella', 'handbag', 'tie', 'suitcase', 'frisbee', 'skis', 'snowboard', 'sports ball', 'kite', 'baseball bat', 'baseball glove', 'skateboard', 'surfboard', 'tennis racket', 'bottle', 'wine glass', 'cup', 'fork', 'knife', 'spoon', 'bowl', 'banana', 'apple', 'sandwich', 'orange', 'broccoli', 'carrot', 'hot dog', 'pizza', 'donut', 'cake', 'chair', 'sofa', 'pottedplant', 'bed', 'diningtable', 'toilet', 'tvmonitor', 'laptop', 'mouse', 'remote', 'keyboard', 'cell phone', 'microwave', 'oven', 'toaster', 'sink', 'refrigerator', 'book', 'clock', 'vase', 'scissors', 'teddy bear', 'hair drier', 'toothbrush'] 
+ anchors :[[0.57273  0.677385]
+ [1.87446  2.06253 ]
+ [3.33843  5.47434 ]
+ [7.88282  3.52778 ]
+ [9.77052  9.16828 ]]
+ image\_shape :(720.0, 1280.0)
+
+    \end{Verbatim}
+
+    \hypertarget{loading-a-pretrained-model}{%
+\subsubsection{3.2 - Loading a pretrained
+model}\label{loading-a-pretrained-model}}
+
+Training a YOLO model takes a very long time and requires a fairly large
+dataset of labelled bounding boxes for a large range of target classes.
+You are going to load an existing pretrained Keras YOLO model stored in
+``yolo.h5''. (These weights come from the official YOLO website, and
+were converted using a function written by Allan Zelener. References are
+at the end of this notebook. Technically, these are the parameters from
+the ``YOLOv2'' model, but we will more simply refer to it as ``YOLO'' in
+this notebook.) Run the cell below to load the model from this file.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{yolo\PYZus{}model} \PY{o}{=} \PY{n}{load\PYZus{}model}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{model\PYZus{}data/yolo.h5}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+C:\textbackslash{}Users\textbackslash{}Srikanth\textbackslash{}AppData\textbackslash{}Local\textbackslash{}conda\textbackslash{}conda\textbackslash{}envs\textbackslash{}SRI\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}keras\textbackslash{}engine\textbackslash{}saving.py:292: UserWarning: No training configuration found in save file: the model was *not* compiled. Compile it manually.
+  warnings.warn('No training configuration found in save file: '
+
+    \end{Verbatim}
+
+    This loads the weights of a trained YOLO model. Here's a summary of the
+layers your model contains.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{yolo\PYZus{}model}\PY{o}{.}\PY{n}{summary}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+Layer (type)                    Output Shape         Param \#     Connected to                     
+==================================================================================================
+input\_1 (InputLayer)            (None, 608, 608, 3)  0                                            
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv2d\_1 (Conv2D)               (None, 608, 608, 32) 864         input\_1[0][0]                    
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+batch\_normalization\_1 (BatchNor (None, 608, 608, 32) 128         conv2d\_1[0][0]                   
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+leaky\_re\_lu\_1 (LeakyReLU)       (None, 608, 608, 32) 0           batch\_normalization\_1[0][0]      
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+max\_pooling2d\_1 (MaxPooling2D)  (None, 304, 304, 32) 0           leaky\_re\_lu\_1[0][0]              
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv2d\_2 (Conv2D)               (None, 304, 304, 64) 18432       max\_pooling2d\_1[0][0]            
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+batch\_normalization\_2 (BatchNor (None, 304, 304, 64) 256         conv2d\_2[0][0]                   
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+leaky\_re\_lu\_2 (LeakyReLU)       (None, 304, 304, 64) 0           batch\_normalization\_2[0][0]      
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+max\_pooling2d\_2 (MaxPooling2D)  (None, 152, 152, 64) 0           leaky\_re\_lu\_2[0][0]              
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv2d\_3 (Conv2D)               (None, 152, 152, 128 73728       max\_pooling2d\_2[0][0]            
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+batch\_normalization\_3 (BatchNor (None, 152, 152, 128 512         conv2d\_3[0][0]                   
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+leaky\_re\_lu\_3 (LeakyReLU)       (None, 152, 152, 128 0           batch\_normalization\_3[0][0]      
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv2d\_4 (Conv2D)               (None, 152, 152, 64) 8192        leaky\_re\_lu\_3[0][0]              
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+batch\_normalization\_4 (BatchNor (None, 152, 152, 64) 256         conv2d\_4[0][0]                   
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+leaky\_re\_lu\_4 (LeakyReLU)       (None, 152, 152, 64) 0           batch\_normalization\_4[0][0]      
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv2d\_5 (Conv2D)               (None, 152, 152, 128 73728       leaky\_re\_lu\_4[0][0]              
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+batch\_normalization\_5 (BatchNor (None, 152, 152, 128 512         conv2d\_5[0][0]                   
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+leaky\_re\_lu\_5 (LeakyReLU)       (None, 152, 152, 128 0           batch\_normalization\_5[0][0]      
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+max\_pooling2d\_3 (MaxPooling2D)  (None, 76, 76, 128)  0           leaky\_re\_lu\_5[0][0]              
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv2d\_6 (Conv2D)               (None, 76, 76, 256)  294912      max\_pooling2d\_3[0][0]            
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+batch\_normalization\_6 (BatchNor (None, 76, 76, 256)  1024        conv2d\_6[0][0]                   
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+leaky\_re\_lu\_6 (LeakyReLU)       (None, 76, 76, 256)  0           batch\_normalization\_6[0][0]      
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv2d\_7 (Conv2D)               (None, 76, 76, 128)  32768       leaky\_re\_lu\_6[0][0]              
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+batch\_normalization\_7 (BatchNor (None, 76, 76, 128)  512         conv2d\_7[0][0]                   
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+leaky\_re\_lu\_7 (LeakyReLU)       (None, 76, 76, 128)  0           batch\_normalization\_7[0][0]      
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv2d\_8 (Conv2D)               (None, 76, 76, 256)  294912      leaky\_re\_lu\_7[0][0]              
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+batch\_normalization\_8 (BatchNor (None, 76, 76, 256)  1024        conv2d\_8[0][0]                   
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+leaky\_re\_lu\_8 (LeakyReLU)       (None, 76, 76, 256)  0           batch\_normalization\_8[0][0]      
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+max\_pooling2d\_4 (MaxPooling2D)  (None, 38, 38, 256)  0           leaky\_re\_lu\_8[0][0]              
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv2d\_9 (Conv2D)               (None, 38, 38, 512)  1179648     max\_pooling2d\_4[0][0]            
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+batch\_normalization\_9 (BatchNor (None, 38, 38, 512)  2048        conv2d\_9[0][0]                   
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+leaky\_re\_lu\_9 (LeakyReLU)       (None, 38, 38, 512)  0           batch\_normalization\_9[0][0]      
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv2d\_10 (Conv2D)              (None, 38, 38, 256)  131072      leaky\_re\_lu\_9[0][0]              
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+batch\_normalization\_10 (BatchNo (None, 38, 38, 256)  1024        conv2d\_10[0][0]                  
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+leaky\_re\_lu\_10 (LeakyReLU)      (None, 38, 38, 256)  0           batch\_normalization\_10[0][0]     
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv2d\_11 (Conv2D)              (None, 38, 38, 512)  1179648     leaky\_re\_lu\_10[0][0]             
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+batch\_normalization\_11 (BatchNo (None, 38, 38, 512)  2048        conv2d\_11[0][0]                  
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+leaky\_re\_lu\_11 (LeakyReLU)      (None, 38, 38, 512)  0           batch\_normalization\_11[0][0]     
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv2d\_12 (Conv2D)              (None, 38, 38, 256)  131072      leaky\_re\_lu\_11[0][0]             
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+batch\_normalization\_12 (BatchNo (None, 38, 38, 256)  1024        conv2d\_12[0][0]                  
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+leaky\_re\_lu\_12 (LeakyReLU)      (None, 38, 38, 256)  0           batch\_normalization\_12[0][0]     
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv2d\_13 (Conv2D)              (None, 38, 38, 512)  1179648     leaky\_re\_lu\_12[0][0]             
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+batch\_normalization\_13 (BatchNo (None, 38, 38, 512)  2048        conv2d\_13[0][0]                  
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+leaky\_re\_lu\_13 (LeakyReLU)      (None, 38, 38, 512)  0           batch\_normalization\_13[0][0]     
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+max\_pooling2d\_5 (MaxPooling2D)  (None, 19, 19, 512)  0           leaky\_re\_lu\_13[0][0]             
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv2d\_14 (Conv2D)              (None, 19, 19, 1024) 4718592     max\_pooling2d\_5[0][0]            
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+batch\_normalization\_14 (BatchNo (None, 19, 19, 1024) 4096        conv2d\_14[0][0]                  
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+leaky\_re\_lu\_14 (LeakyReLU)      (None, 19, 19, 1024) 0           batch\_normalization\_14[0][0]     
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv2d\_15 (Conv2D)              (None, 19, 19, 512)  524288      leaky\_re\_lu\_14[0][0]             
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+batch\_normalization\_15 (BatchNo (None, 19, 19, 512)  2048        conv2d\_15[0][0]                  
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+leaky\_re\_lu\_15 (LeakyReLU)      (None, 19, 19, 512)  0           batch\_normalization\_15[0][0]     
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv2d\_16 (Conv2D)              (None, 19, 19, 1024) 4718592     leaky\_re\_lu\_15[0][0]             
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+batch\_normalization\_16 (BatchNo (None, 19, 19, 1024) 4096        conv2d\_16[0][0]                  
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+leaky\_re\_lu\_16 (LeakyReLU)      (None, 19, 19, 1024) 0           batch\_normalization\_16[0][0]     
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv2d\_17 (Conv2D)              (None, 19, 19, 512)  524288      leaky\_re\_lu\_16[0][0]             
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+batch\_normalization\_17 (BatchNo (None, 19, 19, 512)  2048        conv2d\_17[0][0]                  
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+leaky\_re\_lu\_17 (LeakyReLU)      (None, 19, 19, 512)  0           batch\_normalization\_17[0][0]     
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv2d\_18 (Conv2D)              (None, 19, 19, 1024) 4718592     leaky\_re\_lu\_17[0][0]             
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+batch\_normalization\_18 (BatchNo (None, 19, 19, 1024) 4096        conv2d\_18[0][0]                  
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+leaky\_re\_lu\_18 (LeakyReLU)      (None, 19, 19, 1024) 0           batch\_normalization\_18[0][0]     
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv2d\_19 (Conv2D)              (None, 19, 19, 1024) 9437184     leaky\_re\_lu\_18[0][0]             
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+batch\_normalization\_19 (BatchNo (None, 19, 19, 1024) 4096        conv2d\_19[0][0]                  
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv2d\_21 (Conv2D)              (None, 38, 38, 64)   32768       leaky\_re\_lu\_13[0][0]             
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+leaky\_re\_lu\_19 (LeakyReLU)      (None, 19, 19, 1024) 0           batch\_normalization\_19[0][0]     
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+batch\_normalization\_21 (BatchNo (None, 38, 38, 64)   256         conv2d\_21[0][0]                  
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv2d\_20 (Conv2D)              (None, 19, 19, 1024) 9437184     leaky\_re\_lu\_19[0][0]             
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+leaky\_re\_lu\_21 (LeakyReLU)      (None, 38, 38, 64)   0           batch\_normalization\_21[0][0]     
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+batch\_normalization\_20 (BatchNo (None, 19, 19, 1024) 4096        conv2d\_20[0][0]                  
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+space\_to\_depth\_x2 (Lambda)      (None, 19, 19, 256)  0           leaky\_re\_lu\_21[0][0]             
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+leaky\_re\_lu\_20 (LeakyReLU)      (None, 19, 19, 1024) 0           batch\_normalization\_20[0][0]     
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+concatenate\_1 (Concatenate)     (None, 19, 19, 1280) 0           space\_to\_depth\_x2[0][0]          
+                                                                 leaky\_re\_lu\_20[0][0]             
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv2d\_22 (Conv2D)              (None, 19, 19, 1024) 11796480    concatenate\_1[0][0]              
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+batch\_normalization\_22 (BatchNo (None, 19, 19, 1024) 4096        conv2d\_22[0][0]                  
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+leaky\_re\_lu\_22 (LeakyReLU)      (None, 19, 19, 1024) 0           batch\_normalization\_22[0][0]     
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv2d\_23 (Conv2D)              (None, 19, 19, 425)  435625      leaky\_re\_lu\_22[0][0]             
+==================================================================================================
+Total params: 50,983,561
+Trainable params: 50,962,889
+Non-trainable params: 20,672
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+    \end{Verbatim}
+
+    \textbf{Note}: On some computers, you may see a warning message from
+Keras. Don't worry about it if you do--it is fine.
+
+\textbf{Reminder}: this model converts a preprocessed batch of input
+images (shape: (m, 608, 608, 3)) into a tensor of shape (m, 19, 19, 5,
+85) as explained in Figure (2).
+
+    \hypertarget{convert-output-of-the-model-to-usable-bounding-box-tensors}{%
+\subsubsection{3.3 - Convert output of the model to usable bounding box
+tensors}\label{convert-output-of-the-model-to-usable-bounding-box-tensors}}
+
+The output of \texttt{yolo\_model} is a (m, 19, 19, 5, 85) tensor that
+needs to pass through non-trivial processing and conversion. The
+following cell does that for you.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{c+c1}{\PYZsh{} here in yolo\PYZus{}head we change conv\PYZus{}inputs of height width to get box\PYZus{}xy ,box\PYZus{}wh ,, and also for box\PYZus{}confidence ,}
+         \PY{c+c1}{\PYZsh{}box\PYZus{}scores we get use this so check it once manily for conv\PYZus{}index   and the bo values are just small computations }
+         \PY{n}{yolo\PYZus{}outputs} \PY{o}{=} \PY{n}{yolo\PYZus{}head}\PY{p}{(}\PY{n}{yolo\PYZus{}model}\PY{o}{.}\PY{n}{output}\PY{p}{,} \PY{n}{anchors}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{class\PYZus{}names}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{c+c1}{\PYZsh{} print the yolo\PYZus{}outputs to see what are they , and how the process goes on }
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{yolo\PYZus{}outputs }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{yolo\PYZus{}outputs}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{yolo\PYZus{}outputs}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{yolo\PYZus{}outputs}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}\PY{n}{yolo\PYZus{}outputs}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)} \PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+yolo\_outputs Tensor("Sigmoid:0", shape=(?, ?, ?, 5, 1), dtype=float32) 
+ Tensor("truediv\_2:0", shape=(?, ?, ?, 5, 2), dtype=float32) 
+ Tensor("truediv\_3:0", shape=(?, ?, ?, 5, 2), dtype=float32) 
+ Tensor("Softmax:0", shape=(?, ?, ?, 5, 80), dtype=float32)
+
+    \end{Verbatim}
+
+    You added \texttt{yolo\_outputs} to your graph. This set of 4 tensors is
+ready to be used as input by your \texttt{yolo\_eval} function.
+
+    \hypertarget{filtering-boxes}{%
+\subsubsection{3.4 - Filtering boxes}\label{filtering-boxes}}
+
+\texttt{yolo\_outputs} gave you all the predicted boxes of
+\texttt{yolo\_model} in the correct format. You're now ready to perform
+filtering and select only the best boxes. Lets now call
+\texttt{yolo\_eval}, which you had previously implemented, to do this.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n}{scores}\PY{p}{,} \PY{n}{boxes}\PY{p}{,} \PY{n}{classes} \PY{o}{=} \PY{n}{yolo\PYZus{}eval}\PY{p}{(}\PY{n}{yolo\PYZus{}outputs}\PY{p}{,} \PY{n}{image\PYZus{}shape}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Tensor("mul\_7:0", shape=(?, ?, ?, 5, 80), dtype=float32)
+Tensor("ArgMax\_5:0", shape=(?, ?, ?, 5), dtype=int64) Tensor("Max\_5:0", shape=(?, ?, ?, 5), dtype=float32)
+Tensor("GreaterEqual\_4:0", shape=(?, ?, ?, 5), dtype=bool)
+Tensor("non\_max\_suppression\_2/NonMaxSuppressionV3:0", shape=(?,), dtype=int32)
+
+    \end{Verbatim}
+
+    \hypertarget{run-the-graph-on-an-image}{%
+\subsubsection{3.5 - Run the graph on an
+image}\label{run-the-graph-on-an-image}}
+
+Let the fun begin. You have created a (\texttt{sess}) graph that can be
+summarized as follows:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+   yolo\_model.input is given to \texttt{yolo\_model}. The model is used
+  to compute the output yolo\_model.output 
+\item
+   yolo\_model.output is processed by \texttt{yolo\_head}. It gives you
+  yolo\_outputs 
+\item
+   yolo\_outputs goes through a filtering function, \texttt{yolo\_eval}.
+  It outputs your predictions: scores, boxes, classes 
+\end{enumerate}
+
+\textbf{Exercise}: Implement predict() which runs the graph to test YOLO
+on an image. You will need to run a TensorFlow session, to have it
+compute \texttt{scores,\ boxes,\ classes}.
+
+The code below also uses the following function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{image, image_data }\OperatorTok{=}\NormalTok{ preprocess_image(}\StringTok{"images/"} \OperatorTok{+}\NormalTok{ image_file, model_image_size }\OperatorTok{=}\NormalTok{ (}\DecValTok{608}\NormalTok{, }\DecValTok{608}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+which outputs: - image: a python (PIL) representation of your image used
+for drawing boxes. You won't need to use it. - image\_data: a
+numpy-array representing the image. This will be the input to the CNN.
+
+\textbf{Important note}: when a model uses BatchNorm (as is the case in
+YOLO), you will need to pass an additional placeholder in the feed\_dict
+\{K.learning\_phase(): 0\}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{k}{def} \PY{n+nf}{predict}\PY{p}{(}\PY{n}{sess}\PY{p}{,} \PY{n}{image\PYZus{}file}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    Runs the graph stored in \PYZdq{}sess\PYZdq{} to predict boxes for \PYZdq{}image\PYZus{}file\PYZdq{}. Prints and plots the preditions.}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Arguments:}
+         \PY{l+s+sd}{    sess \PYZhy{}\PYZhy{} your tensorflow/Keras session containing the YOLO graph}
+         \PY{l+s+sd}{    image\PYZus{}file \PYZhy{}\PYZhy{} name of an image stored in the \PYZdq{}images\PYZdq{} folder.}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Returns:}
+         \PY{l+s+sd}{    out\PYZus{}scores \PYZhy{}\PYZhy{} tensor of shape (None, ), scores of the predicted boxes}
+         \PY{l+s+sd}{    out\PYZus{}boxes \PYZhy{}\PYZhy{} tensor of shape (None, 4), coordinates of the predicted boxes}
+         \PY{l+s+sd}{    out\PYZus{}classes \PYZhy{}\PYZhy{} tensor of shape (None, ), class index of the predicted boxes}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Note: \PYZdq{}None\PYZdq{} actually represents the number of predicted boxes, it varies between 0 and max\PYZus{}boxes. }
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+         
+             \PY{c+c1}{\PYZsh{} Preprocess your image}
+             \PY{n}{image}\PY{p}{,} \PY{n}{image\PYZus{}data} \PY{o}{=} \PY{n}{preprocess\PYZus{}image}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{images/}\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{image\PYZus{}file}\PY{p}{,} \PY{n}{model\PYZus{}image\PYZus{}size} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{608}\PY{p}{,} \PY{l+m+mi}{608}\PY{p}{)}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Run the session with the correct tensors and choose the correct placeholders in the feed\PYZus{}dict.}
+             \PY{c+c1}{\PYZsh{} You\PYZsq{}ll need to use feed\PYZus{}dict=\PYZob{}yolo\PYZus{}model.input: ... , K.learning\PYZus{}phase(): 0\PYZcb{})}
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} START CODE HERE \PYZsh{}\PYZsh{}\PYZsh{} (≈ 1 line)}
+             \PY{n}{out\PYZus{}scores}\PY{p}{,} \PY{n}{out\PYZus{}boxes}\PY{p}{,} \PY{n}{out\PYZus{}classes} \PY{o}{=} \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{p}{[}\PY{n}{scores}\PY{p}{,} \PY{n}{boxes}\PY{p}{,} \PY{n}{classes}\PY{p}{]}\PY{p}{,} 
+                                                           \PY{n}{feed\PYZus{}dict} \PY{o}{=} \PY{p}{\PYZob{}}\PY{n}{yolo\PYZus{}model}\PY{o}{.}\PY{n}{input}\PY{p}{:}\PY{n}{image\PYZus{}data}\PY{p}{,} \PY{n}{K}\PY{o}{.}\PY{n}{learning\PYZus{}phase}\PY{p}{(}\PY{p}{)}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{\PYZcb{}}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} END CODE HERE \PYZsh{}\PYZsh{}\PYZsh{}}
+         
+             \PY{c+c1}{\PYZsh{} Print predictions info}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Found }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{ boxes for }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{out\PYZus{}boxes}\PY{p}{)}\PY{p}{,} \PY{n}{image\PYZus{}file}\PY{p}{)}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} Generate colors for drawing bounding boxes.}
+             \PY{n}{colors} \PY{o}{=} \PY{n}{generate\PYZus{}colors}\PY{p}{(}\PY{n}{class\PYZus{}names}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} Draw bounding boxes on the image file}
+             \PY{n}{draw\PYZus{}boxes}\PY{p}{(}\PY{n}{image}\PY{p}{,} \PY{n}{out\PYZus{}scores}\PY{p}{,} \PY{n}{out\PYZus{}boxes}\PY{p}{,} \PY{n}{out\PYZus{}classes}\PY{p}{,} \PY{n}{class\PYZus{}names}\PY{p}{,} \PY{n}{colors}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} Save the predicted bounding box on the image}
+             \PY{n}{image}\PY{o}{.}\PY{n}{save}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{out}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{image\PYZus{}file}\PY{p}{)}\PY{p}{,} \PY{n}{quality}\PY{o}{=}\PY{l+m+mi}{90}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} Display the results in the notebook}
+             \PY{n}{output\PYZus{}image} \PY{o}{=} \PY{n}{scipy}\PY{o}{.}\PY{n}{misc}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{out}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{image\PYZus{}file}\PY{p}{)}\PY{p}{)}
+             \PY{n}{imshow}\PY{p}{(}\PY{n}{output\PYZus{}image}\PY{p}{)}
+             
+             \PY{k}{return} \PY{n}{out\PYZus{}scores}\PY{p}{,} \PY{n}{out\PYZus{}boxes}\PY{p}{,} \PY{n}{out\PYZus{}classes}
+\end{Verbatim}
+
+
+    Run the following cell on the ``test.jpg'' image to verify that your
+function is correct.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n}{out\PYZus{}scores}\PY{p}{,} \PY{n}{out\PYZus{}boxes}\PY{p}{,} \PY{n}{out\PYZus{}classes} \PY{o}{=} \PY{n}{predict}\PY{p}{(}\PY{n}{sess}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{test.jpg}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Found 7 boxes for test.jpg
+car 0.60 (925, 285) (1045, 374)
+car 0.66 (706, 279) (786, 350)
+bus 0.67 (5, 266) (220, 407)
+car 0.70 (947, 324) (1280, 705)
+car 0.74 (159, 303) (346, 440)
+car 0.80 (761, 282) (942, 412)
+car 0.89 (367, 300) (745, 648)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+C:\textbackslash{}Users\textbackslash{}Srikanth\textbackslash{}AppData\textbackslash{}Local\textbackslash{}conda\textbackslash{}conda\textbackslash{}envs\textbackslash{}SRI\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}ipykernel\_launcher.py:36: DeprecationWarning: `imread` is deprecated!
+`imread` is deprecated in SciPy 1.0.0, and will be removed in 1.2.0.
+Use ``imageio.imread`` instead.
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_55_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{n}{out\PYZus{}scores}\PY{p}{,} \PY{n}{out\PYZus{}boxes}\PY{p}{,} \PY{n}{out\PYZus{}classes} \PY{o}{=} \PY{n}{predict}\PY{p}{(}\PY{n}{sess}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{0099.jpg}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} 
+         \PY{c+c1}{\PYZsh{} these yolo not working properly because it not identifying correctly as above figure car is not detected }
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Found 3 boxes for 0099.jpg
+car 0.75 (1046, 352) (1279, 608)
+car 0.78 (859, 316) (972, 427)
+car 0.86 (921, 336) (1120, 476)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+C:\textbackslash{}Users\textbackslash{}Srikanth\textbackslash{}AppData\textbackslash{}Local\textbackslash{}conda\textbackslash{}conda\textbackslash{}envs\textbackslash{}SRI\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}ipykernel\_launcher.py:36: DeprecationWarning: `imread` is deprecated!
+`imread` is deprecated in SciPy 1.0.0, and will be removed in 1.2.0.
+Use ``imageio.imread`` instead.
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_56_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{n}{out\PYZus{}scores}\PY{p}{,} \PY{n}{out\PYZus{}boxes}\PY{p}{,} \PY{n}{out\PYZus{}classes} \PY{o}{=} \PY{n}{predict}\PY{p}{(}\PY{n}{sess}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sri1.jpg}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Found 2 boxes for sri1.jpg
+person 0.61 (443, 274) (949, 696)
+person 0.77 (13, 43) (590, 742)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+C:\textbackslash{}Users\textbackslash{}Srikanth\textbackslash{}AppData\textbackslash{}Local\textbackslash{}conda\textbackslash{}conda\textbackslash{}envs\textbackslash{}SRI\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}ipykernel\_launcher.py:36: DeprecationWarning: `imread` is deprecated!
+`imread` is deprecated in SciPy 1.0.0, and will be removed in 1.2.0.
+Use ``imageio.imread`` instead.
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_57_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \textbf{Expected Output}:
+
+\textbf{Found 7 boxes for test.jpg}
+
+\textbf{car}
+
+0.60 (925, 285) (1045, 374)
+
+\textbf{car}
+
+0.66 (706, 279) (786, 350)
+
+\textbf{bus}
+
+0.67 (5, 266) (220, 407)
+
+\textbf{car}
+
+0.70 (947, 324) (1280, 705)
+
+\textbf{car}
+
+0.74 (159, 303) (346, 440)
+
+\textbf{car}
+
+0.80 (761, 282) (942, 412)
+
+\textbf{car}
+
+0.89 (367, 300) (745, 648)
+
+    The model you've just run is actually able to detect 80 different
+classes listed in ``coco\_classes.txt''. To test the model on your own
+images: 1. Click on ``File'' in the upper bar of this notebook, then
+click ``Open'' to go on your Coursera Hub. 2. Add your image to this
+Jupyter Notebook's directory, in the ``images'' folder 3. Write your
+image's name in the cell above code 4. Run the code and see the output
+of the algorithm!
+
+If you were to run your session in a for loop over all your images.
+Here's what you would get:
+
+Predictions of the YOLO model on pictures taken from a camera while
+driving around the Silicon Valley Thanks
+\href{https://www.drive.ai/}{drive.ai} for providing this dataset!
+
+     \textbf{What you should remember}: - YOLO is a state-of-the-art object
+detection model that is fast and accurate - It runs an input image
+through a CNN which outputs a 19x19x5x85 dimensional volume. - The
+encoding can be seen as a grid where each of the 19x19 cells contains
+information about 5 boxes. - You filter through all the boxes using
+non-max suppression. Specifically: - Score thresholding on the
+probability of detecting a class to keep only accurate (high
+probability) boxes - Intersection over Union (IoU) thresholding to
+eliminate overlapping boxes - Because training a YOLO model from
+randomly initialized weights is non-trivial and requires a large dataset
+as well as lot of computation, we used previously trained model
+parameters in this exercise. If you wish, you can also try fine-tuning
+the YOLO model with your own dataset, though this would be a fairly
+non-trivial exercise.
+
+    \textbf{References}: The ideas presented in this notebook came primarily
+from the two YOLO papers. The implementation here also took significant
+inspiration and used many components from Allan Zelener's github
+repository. The pretrained weights used in this exercise came from the
+official YOLO website. - Joseph Redmon, Santosh Divvala, Ross Girshick,
+Ali Farhadi - \href{https://arxiv.org/abs/1506.02640}{You Only Look
+Once: Unified, Real-Time Object Detection} (2015) - Joseph Redmon, Ali
+Farhadi - \href{https://arxiv.org/abs/1612.08242}{YOLO9000: Better,
+Faster, Stronger} (2016) - Allan Zelener -
+\href{https://github.com/allanzelener/YAD2K}{YAD2K: Yet Another Darknet
+2 Keras} - The official YOLO website
+(https://pjreddie.com/darknet/yolo/)
+
+    \textbf{Car detection dataset}: {The Drive.ai Sample Dataset} (provided
+by drive.ai) is licensed under a Creative Commons Attribution 4.0
+International License. We are especially grateful to Brody Huval, Chih
+Hu and Rahul Patel for collecting and providing this dataset.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
